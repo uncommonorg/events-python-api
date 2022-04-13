@@ -14,6 +14,9 @@ class EventsList(Resource):
 class Event(Resource):
     def __init__(self, repo=repository):
         self.repo = repo
+
+    def get(self, event_id):
+        return self.repo.get_event_by_id(int(event_id))
         
     def post(self):
         data = request.get_json()
@@ -33,7 +36,6 @@ class Review(Resource):
     def get(self):
         return [review.__dict__ for review in self.repo.reviews_get_all()]
 
-    
     def post(self):
        data = request.get_json()
        return self.repo.review_add(data).__dict__
