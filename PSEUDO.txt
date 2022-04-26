@@ -1,0 +1,46 @@
+Pepe
+My role is going to be more of a guide/advisor, 
+and to make sure that we use GitHub and 
+Google Cloud correctly. Manage Trello. Update Schema.
+My tasks:
+    - Create project in google Cloud
+    - Containerize
+    - Set up continuous deployment
+    - Set up DB
+        - Create tables for users and events
+    - Make sure that main is working 
+    (back is talking to front)
+    - Give access to schema to the team
+
+Precell
+Working on backend providing data to frontend 
+
+Diana 
+CRUD actions on the React (frontent)
+- User 
+- Events
+
+Tawanda
+User registration for events (frontend)
+Automate emails for upcoming events
+Help Precell with backend
+
+Tadiwanashe
+User registration for events (backend)
+
+Tanya
+Work on email notification to users when event 
+is posted
+Use google maps to show location of events
+
+
+To do:
+Sign in error message
+Sign up error message
+Password recovery
+Change password 
+Update profile info (Change email, name, etc.)
+Error handling: if there is a problem fetching events, the application should not crash
+User profile page
+React: Lots of complexity. We should simplify routes. Simplify components.
+ 
