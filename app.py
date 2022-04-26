@@ -1,8 +1,11 @@
 from flask import Flask
 from flask_restful import Api
+from flask_cors import CORS
 from routes import EventsList, Event, ReviewList
 
 app = Flask(__name__)
+CORS(app)
+
 api = Api(app)
 
 BASE_URL = '/events/api'
