@@ -16,7 +16,7 @@ class Event(Resource):
         self.repo = repo
 
     def get(self, event_id):
-        return self.repo.get_event_by_id(int(event_id))
+        return self.repo.get_event_by_id(int(event_id)).__dict__
         
     def post(self):
         data = request.get_json()
