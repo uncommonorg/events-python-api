@@ -1,13 +1,16 @@
-from models import EventModel, ReviewModel
+from models import EventModel, UserModel
 import psycopg2
 
-event1 = EventModel("church service","Happening at goromonzi","@4pm", 1)
-event2 = EventModel("party","happening in Harare","@2pm" ,2)
+event1 = EventModel("church service","Child dedication","24/08/22", "Sunshine Gardens", 1)
+event2 = EventModel("Birthday","Celebrating John Doe 25th birthday","29/08/22", "EastGate Harare", 1)
+event3 = EventModel("Managers workshop","Discuss the goals for the year","01/09/22", "Mfakose Hub", 1)
 
-review1 = ReviewModel("reviewed by Tino","@1am", 1)
-review2 = ReviewModel("reviewer by Tine","@", 2)
-review3 = ReviewModel("reviewer by Tine", "@", 3)
-review4 = ReviewModel("reviewer by Tine", "@", 4)
+user1 = UserModel("John", "Doe", "jdoe@gmail.com", 1)
+user2 = UserModel("Jane", "Doe", "jaydoe@gmail.com", 1)
+user3 = UserModel("Katt", "Williams", "kattwill@gmail.com", 1)
+user4 = UserModel("Abraham", "Lincoln", "ablinc@gmail.com", 1)
+
+
 
 HOST = '127.0.0.1'
 USER = 'postgres'
@@ -67,23 +70,22 @@ class Repository():
             if conn is not None:
                 conn.close()  
        
-        events = [event1, event2]
-        return [x.__dict__ for x in events if x.eventId == event_id]
     
-    def reviews_get_all(self):
-        return [review1, review2]
-        return next((x for x in events if x.eventId == event_id), None)
+    def users_get_all(self):
+        users =  [user1, user2, user3, user4]
+        return users
 
-    def reviews_get_by_event_id(self, event_id):
-        reviews = [review1,review2,review3,review4]
-        return [x for x in reviews if x.eventId == event_id]
+    def user_get_by_event_id(self, event_id):
+        users =  [user1, user2, user3, user4]
+        return [x for x in users if x.id == event_id]
 
-    def review_get_by_id(self, event_id):
-        reviews = [review1, review2]
-        return next((x for x in reviews if x.eventId == event_id), None)
+    def user_add(self, data):
+        return UserModel(data['name'], data['last_name'], data['email'], 1)
 
-    def review_add(self, data):
-        return ReviewModel(data['content'], data['eventId'], 1)
+    # def review_get_by_id(self, event_id):
+    #     users =  [user1, user2, user3, user4]
+    #     return next((x for x in users if x.eventId == event_id), None)
 
+    
 
   
