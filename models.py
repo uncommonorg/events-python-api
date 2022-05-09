@@ -8,7 +8,7 @@ class EventModel():
         self.eventId = id
 
 class UserModel():
-    def __inti__(self, name, last_name, email, id):
+    def __init__(self, name, last_name, email, id):
         self.name = name
         self.last_name  = last_name
         self.email = email

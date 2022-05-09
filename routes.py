@@ -20,7 +20,7 @@ class Event(Resource):
         
     def post(self):
         data = request.get_json()
-        return self.repo.user_add(data).__dict__
+        return self.repo.event_add(data).__dict__
 
 class UserList(Resource):
     def __init__(self, repo=repository):
@@ -34,7 +34,7 @@ class User(Resource):
         self.repo = repo
 
     def get(self, event_id):
-        return self.repo.user_get_by_event_id(int(event_id)).__dict__
+        return self.repo.user_get_by_event_id(int(event_id))
 
     def post(self):
        data = request.get_json()

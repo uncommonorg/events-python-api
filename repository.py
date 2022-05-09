@@ -8,7 +8,7 @@ event3 = EventModel("Managers workshop","Discuss the goals for the year","01/09/
 user1 = UserModel("John", "Doe", "jdoe@gmail.com", 1)
 user2 = UserModel("Jane", "Doe", "jaydoe@gmail.com", 1)
 user3 = UserModel("Katt", "Williams", "kattwill@gmail.com", 1)
-user4 = UserModel("Abraham", "Lincoln", "ablinc@gmail.com", 1)
+user4 = UserModel("Abraham", "Lincoln", "ablinc@gmail.com", 2)
 
 
 
@@ -38,11 +38,12 @@ class Repository():
                     "SELECT title, author, cover FROM book "
                 )
                 events_records = ps_cursor.fetchall()
-                events_list = []
-                for row in events_records:
-                    events_list.append(EventModel(row[0], row[1], row[2]))  
-                ps_cursor.close()
-                return events_list
+                # events_list = []
+                # for row in events_records:
+                #     events_list.append(EventModel(row[0], row[1], row[2]))  
+                # ps_cursor.close()
+                events = [event3, event1, event2]
+                return events
                  
         except Exception as error:
             print(error)
@@ -62,13 +63,16 @@ class Repository():
                 )
                 event_record = ps_cursor.fetchone()
                 ps_cursor.close()
-                event = EventModel(event_record[0], event_record[1], event_record[2])
+                event = EventModel(event_record[0], event_record[1], event_record[2], event_record[0], event_record[1])
             return event
         except Exception as error:
             print(error)
         finally:      
             if conn is not None:
                 conn.close()  
+       
+    def event_add(self, data):
+        return EventModel(data['title'], data['description'], data['date'], data['venue'], 2)
        
     
     def users_get_all(self):
@@ -77,7 +81,7 @@ class Repository():
 
     def user_get_by_event_id(self, event_id):
         users =  [user1, user2, user3, user4]
-        return [x for x in users if x.id == event_id]
+        return [x.__dict__ for x in users if x.id == event_id]
 
     def user_add(self, data):
         return UserModel(data['name'], data['last_name'], data['email'], 1)
