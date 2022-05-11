@@ -1,18 +1,21 @@
-from models import EventModel, ReviewModel
+from models import EventModel, UserModel
 import psycopg2
 
-event1 = EventModel("church service","Happening at goromonzi","@4pm", 1)
-event2 = EventModel("party","happening in Harare","@2pm" ,2)
+event1 = EventModel("church service","Child dedication","24/08/22", "Sunshine Gardens", 1)
+event2 = EventModel("Birthday","Celebrating John Doe 25th birthday","29/08/22", "EastGate Harare", 1)
+event3 = EventModel("Managers workshop","Discuss the goals for the year","01/09/22", "Mfakose Hub", 1)
 
-review1 = ReviewModel("reviewed by Tino","@1am", 1)
-review2 = ReviewModel("reviewer by Tine","@", 2)
-review3 = ReviewModel("reviewer by Tine", "@", 3)
-review4 = ReviewModel("reviewer by Tine", "@", 4)
+user1 = UserModel("John", "Doe", "jdoe@gmail.com", 1)
+user2 = UserModel("Jane", "Doe", "jaydoe@gmail.com", 1)
+user3 = UserModel("Katt", "Williams", "kattwill@gmail.com", 1)
+user4 = UserModel("Abraham", "Lincoln", "ablinc@gmail.com", 2)
+
+
 
 HOST = '127.0.0.1'
 USER = 'postgres'
 DB_PORT = 5432
-DATABASE = 'bookreactions'
+DATABASE = 'eventsdb'
 PASSWORD = 'precell'
 class Repository():
     def get_db(self):
@@ -32,13 +35,14 @@ class Repository():
             if(conn):
                 ps_cursor = conn.cursor()
                 ps_cursor.execute(
-                    "SELECT title, author, cover FROM book "
+                    "SELECT title, details, id, venue, likes, created_at FROM events order by id"
                 )
                 events_records = ps_cursor.fetchall()
                 events_list = []
                 for row in events_records:
-                    events_list.append(EventModel(row[0], row[1], row[2]))  
+                    events_list.append(EventModel(row[0], row[1], row[3], row[3 ], row[2]))  
                 ps_cursor.close()
+                events = [event3, event1, event2]
                 return events_list
                  
         except Exception as error:
@@ -55,11 +59,11 @@ class Repository():
             if (conn):
                 ps_cursor = conn.cursor()
                 ps_cursor.execute(
-                    f'SELECT title, author, cover FROM book WHERE bookId = {int(id)}'
+                    f'SELECT title, details, id, venue, likes FROM events WHERE id = {int(id)}'
                 )
                 event_record = ps_cursor.fetchone()
                 ps_cursor.close()
-                event = EventModel(event_record[0], event_record[1], event_record[2])
+                event = EventModel(event_record[0], event_record[1], event_record[3], event_record[2], event_record[2])
             return event
         except Exception as error:
             print(error)
@@ -67,23 +71,25 @@ class Repository():
             if conn is not None:
                 conn.close()  
        
-        events = [event1, event2]
-        return [x.__dict__ for x in events if x.eventId == event_id]
+    def event_add(self, data):
+        return EventModel(data['title'], data['description'], data['date'], data['venue'], 2)
+       
     
-    def reviews_get_all(self):
-        return [review1, review2]
-        return next((x for x in events if x.eventId == event_id), None)
+    def users_get_all(self):
+        users =  [user1, user2, user3, user4]
+        return users
 
-    def reviews_get_by_event_id(self, event_id):
-        reviews = [review1,review2,review3,review4]
-        return [x for x in reviews if x.eventId == event_id]
+    def user_get_by_event_id(self, event_id):
+        users =  [user1, user2, user3, user4]
+        return [x.__dict__ for x in users if x.id == event_id]
 
-    def review_get_by_id(self, event_id):
-        reviews = [review1, review2]
-        return next((x for x in reviews if x.eventId == event_id), None)
+    def user_add(self, data):
+        return UserModel(data['name'], data['last_name'], data['email'], 1)
 
-    def review_add(self, data):
-        return ReviewModel(data['content'], data['eventId'], 1)
+    # def review_get_by_id(self, event_id):
+    #     users =  [user1, user2, user3, user4]
+    #     return next((x for x in users if x.eventId == event_id), None)
 
+    
 
   
