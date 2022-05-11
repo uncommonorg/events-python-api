@@ -15,7 +15,7 @@ user4 = UserModel("Abraham", "Lincoln", "ablinc@gmail.com", 2)
 HOST = '127.0.0.1'
 USER = 'postgres'
 DB_PORT = 5432
-DATABASE = 'bookreactions'
+DATABASE = 'eventsdb'
 PASSWORD = 'precell'
 class Repository():
     def get_db(self):
@@ -35,15 +35,15 @@ class Repository():
             if(conn):
                 ps_cursor = conn.cursor()
                 ps_cursor.execute(
-                    "SELECT title, author, cover FROM book "
+                    "SELECT title, details, id, venue, likes, created_at FROM events order by id"
                 )
                 events_records = ps_cursor.fetchall()
-                # events_list = []
-                # for row in events_records:
-                #     events_list.append(EventModel(row[0], row[1], row[2]))  
-                # ps_cursor.close()
+                events_list = []
+                for row in events_records:
+                    events_list.append(EventModel(row[0], row[1], row[3], row[3 ], row[2]))  
+                ps_cursor.close()
                 events = [event3, event1, event2]
-                return events
+                return events_list
                  
         except Exception as error:
             print(error)
@@ -59,11 +59,11 @@ class Repository():
             if (conn):
                 ps_cursor = conn.cursor()
                 ps_cursor.execute(
-                    f'SELECT title, author, cover FROM book WHERE bookId = {int(id)}'
+                    f'SELECT title, details, id, venue, likes FROM events WHERE id = {int(id)}'
                 )
                 event_record = ps_cursor.fetchone()
                 ps_cursor.close()
-                event = EventModel(event_record[0], event_record[1], event_record[2], event_record[0], event_record[1])
+                event = EventModel(event_record[0], event_record[1], event_record[3], event_record[2], event_record[2])
             return event
         except Exception as error:
             print(error)

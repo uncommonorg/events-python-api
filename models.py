@@ -1,11 +1,10 @@
 class EventModel():
-    def __init__(self, title, description, date, venue, created_at, id=-1):
+    def __init__(self, title, details, venue, created_at, id=-1):
         self.title = title
-        self.description = description
+        self.details = details
         self.created_at = created_at
-        self.date = date
         self.venue = venue
-        self.eventId = id
+        self.id = id
 
 class UserModel():
     def __init__(self, name, last_name, email, id):
