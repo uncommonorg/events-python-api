@@ -1,15 +1,13 @@
 class EventModel():
-    def __init__(self, title, details, venue, created_at, id=-1):
+    def __init__(self, title, content, created_at, id=-1):
         self.title = title
-        self.details = details
+        self.content = content
         self.created_at = created_at
-        self.venue = venue
-        self.id = id
+        self.eventId = id
 
-class UserModel():
-    def __init__(self, name, last_name, email, id):
-        self.name = name
-        self.last_name  = last_name
-        self.email = email
+class ReviewModel():
+    def __init__(self, comment, created_at, eventId, id=-1):
+        self.comment = comment
+        self.created_at = created_at
+        self.eventId = eventId
         self.id = id
-
