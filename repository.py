@@ -9,27 +9,53 @@ review3 = ReviewModel("reviewer by Tine", "@", 3)
 review4 = ReviewModel("reviewer by Tine", "@", 4)
 
 class Repository():
-    def events_get_all(self):
-        return [event1, event2]
-
-    def get_event_by_id(self, event_id):
-        events = [event1, event2]
-        return [x.__dict__ for x in events if x.eventId == event_id]
-    
-    def reviews_get_all(self):
-        return [review1, review2]
-        return next((x for x in events if x.eventId == event_id), None)
-
-    def reviews_get_by_event_id(self, event_id):
-        reviews = [review1,review2,review3,review4]
-        return [x for x in reviews if x.eventId == event_id]
-
-    def review_get_by_id(self, event_id):
-        reviews = [review1, review2]
-        return next((x for x in reviews if x.eventId == event_id), None)
-
-    def review_add(self, data):
-        return ReviewModel(data['content'], data['eventId'], 1)
+    def events_get_all
+        conn = None
+        try:
+            conn = self.get_db()
+            if(conn):
+                ps_cursor = conn.cursor()
+                ps_cursor.execute(
+                    "SELECT title, details, venue, likes, id FROM events order by id"
+                )
+                events_records = ps_cursor.fetchall()
+                events_list = []
+                for row in events_records:
+                    events_list.append(EventModel(row[0], row[1], row[2], row[3], row[4]))  
+                ps_cursor.close()
+                events = [event3, event1, event2]
+                return events_list
+                 
+        except Exception as error:
+            print(error)
+        finally:    
+            if conn is not None:
+                conn.close()
+        
+    users_table
+    def users_get_all(self):
+        conn = None
+        try:
+            conn = self.get_db()
+            if (conn):
+                ps_cursor = conn.cursor()
+                ps_cursor.execute(
+                    'SELECT user_name, last_name, email, id from users'
+                )
+                users_records = ps_cursor.fetchall()
+                users_list = []
+                for row in users_records:
+                    users_list.append(UserModel(row[0], row[1], row[2], row[3]))
+                ps_cursor.close()
+                users =  [user1, user2, user3, user4]
+            return users_list      
+        except Exception as error:
+            print(error)
+        finally:  
+            if conn is not None:
+                conn.close()     
+        
+        
 
 
   
