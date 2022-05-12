@@ -1,4 +1,5 @@
 class EventModel():
+  users_table
     def __init__(self, title, details, venue, likes, id=-1):
         self.title = title
         self.details = details
@@ -12,4 +13,6 @@ class UserModel():
         self.last_name  = last_name
         self.email = email
         self.id = id
+        
+   
 
