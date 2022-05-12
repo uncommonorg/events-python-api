@@ -1,8 +1,8 @@
 class EventModel():
-    def __init__(self, title, details, venue, created_at, id=-1):
+    def __init__(self, title, details, venue, likes, id=-1):
         self.title = title
         self.details = details
-        self.created_at = created_at
+        self.likes = likes
         self.venue = venue
         self.id = id
 
