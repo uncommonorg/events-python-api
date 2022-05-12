@@ -31,8 +31,7 @@ class Repository():
         finally:    
             if conn is not None:
                 conn.close()
-        
-    users_table
+                
     def users_get_all(self):
         conn = None
         try:
