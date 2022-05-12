@@ -76,8 +76,28 @@ class Repository():
        
     
     def users_get_all(self):
-        users =  [user1, user2, user3, user4]
-        return users
+        conn = None
+        try:
+            conn = self.get_db()
+            if (conn):
+                ps_cursor = conn.cursor()
+                ps_cursor.execute(
+                    'SELECT user_name, last_name, email, id from users'
+                )
+                users_records = ps_cursor.fetchall()
+                users_list = []
+                for row in users_records:
+                    users_list.append(UserModel(row[0], row[1], row[2], row[3]))
+                ps_cursor.close()
+                users =  [user1, user2, user3, user4]
+            return users_list      
+        except Exception as error:
+            print(error)
+        finally:  
+            if conn is not None:
+                conn.close()     
+        
+        
 
     def user_get_by_event_id(self, event_id):
         users =  [user1, user2, user3, user4]
