@@ -21,7 +21,7 @@ class Repository():
                 events_records = ps_cursor.fetchall()
                 events_list = []
                 for row in events_records:
-                    events_list.append(EventModel(row[0], row[1], row[2], row[3], row[4]))  
+                    events_list.append(EventModel(row[1], row[0], row[2], row[3], row[4]))  
                 ps_cursor.close()
                 events = [event3, event1, event2]
                 return events_list
