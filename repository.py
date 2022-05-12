@@ -36,12 +36,12 @@ class Repository():
             if(conn):
                 ps_cursor = conn.cursor()
                 ps_cursor.execute(
-                    "SELECT title, details, id, venue, likes, created_at FROM events order by id"
+                    "SELECT title, details, venue, likes, id FROM events order by id"
                 )
                 events_records = ps_cursor.fetchall()
                 events_list = []
                 for row in events_records:
-                    events_list.append(EventModel(row[0], row[1], row[3], row[3 ], row[2]))  
+                    events_list.append(EventModel(row[0], row[1], row[2], row[3], row[4]))  
                 ps_cursor.close()
                 events = [event3, event1, event2]
                 return events_list
@@ -64,7 +64,7 @@ class Repository():
                 )
                 event_record = ps_cursor.fetchone()
                 ps_cursor.close()
-                event = EventModel(event_record[0], event_record[1], event_record[3], event_record[2], event_record[2])
+                event = EventModel(event_record[0], event_record[1], event_record[2], event_record[3], event_record[4])
             return event
         except Exception as error:
             print(error)
