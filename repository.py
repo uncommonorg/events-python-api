@@ -9,7 +9,7 @@ review3 = ReviewModel("reviewer by Tine", "@", 3)
 review4 = ReviewModel("reviewer by Tine", "@", 4)
 
 class Repository():
-    def events_get_all
+    def events_get_all():
         conn = None
         try:
             conn = self.get_db()
