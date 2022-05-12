@@ -39,7 +39,7 @@ class Repository():
             if (conn):
                 ps_cursor = conn.cursor()
                 ps_cursor.execute(
-                    'SELECT user_name, last_name, email, id from users'
+                    f'SELECT title, details, venue, likes, id FROM events WHERE id = {int(id)}'
                 )
                 users_records = ps_cursor.fetchall()
                 users_list = []
