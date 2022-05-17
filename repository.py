@@ -1,5 +1,6 @@
 from models import EventModel, UserModel
 import psycopg2
+import os
 
 event1 = EventModel("church service","Child dedication","24/08/22", "Sunshine Gardens", 1)
 event2 = EventModel("Birthday","Celebrating John Doe 25th birthday","29/08/22", "EastGate Harare", 1)
@@ -13,11 +14,11 @@ user4 = UserModel("Abraham", "Lincoln", "ablinc@gmail.com", 2)
 
 
 
-HOST = '127.0.0.1'
-USER = 'postgres'
-DB_PORT = 5432
-DATABASE = 'eventsdb'
-PASSWORD = 'precell'
+HOST = os.environ.get("HOST")
+USER = os.environ.get("USER")
+DB_PORT = os.environ.get("DB_PORT")
+DATABASE = os.environ.get("DATABASE")
+PASSWORD = os.environ.get("PASSWORD")
 class Repository():
     def get_db(self):
         return psycopg2.connect(
