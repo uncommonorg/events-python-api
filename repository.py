@@ -19,6 +19,7 @@ USER = os.environ.get("USER")
 DB_PORT = os.environ.get("DB_PORT")
 DATABASE = os.environ.get("DATABASE")
 PASSWORD = os.environ.get("PASSWORD")
+
 class Repository():
     def get_db(self):
         return psycopg2.connect(
