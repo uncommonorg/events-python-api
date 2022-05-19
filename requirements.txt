@@ -2,3 +2,4 @@ flask-restful
 psycopg2
 pytest
 flask-cors
+python-dotenv
