@@ -23,13 +23,11 @@ PASSWORD = os.environ.get("PASSWORD")
 class Repository():
     def get_db(self):
         return psycopg2.connect(
-            host = HOST,
-            database = DATABASE,
-            user  = USER,
-            password = PASSWORD,
-            port = DB_PORT,
-            
-        )
+                        host = HOST,
+                        database = DATABASE,
+                        user  = USER,
+                        password = PASSWORD,
+                        port = DB_PORT)
         
     def events_get_all(self):
         conn = None
