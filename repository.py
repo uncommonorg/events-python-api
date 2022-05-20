@@ -1,6 +1,7 @@
 from flask import current_app, g
 from models import EventModel, UserModel
 import psycopg2
+import os
 
 
 event1 = EventModel("church service","Child dedication","24/08/22", "Sunshine Gardens", 1)
@@ -12,8 +13,6 @@ user2 = UserModel("Jane", "Doe", "jaydoe@gmail.com", 1)
 user3 = UserModel("Katt", "Williams", "kattwill@gmail.com", 1)
 user4 = UserModel("Abraham", "Lincoln", "ablinc@gmail.com", 2)
 user4 = UserModel("Abraham", "Lincoln", "ablinc@gmail.com", 2)
-
-
 
 
 class Repository():
