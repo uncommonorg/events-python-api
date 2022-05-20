@@ -9,6 +9,7 @@ class EventsList(Resource):
         self.repo = repo
         
     def get(self):
+        # return 'precell'
         return [event.__dict__ for event in self.repo.events_get_all()]
     
 class Event(Resource):
