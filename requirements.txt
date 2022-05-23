@@ -2,3 +2,7 @@ flask-restful
 psycopg2
 pytest
 flask-cors
+dotenv
+flaskSqlAlchemy
+flask
+firebase-admin

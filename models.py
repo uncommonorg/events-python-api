@@ -11,3 +11,13 @@ class ReviewModel():
         self.created_at = created_at
         self.eventId = eventId
         self.id = id
+        
+
+class UserModel():
+    def _init_(self, name, last_name, email, id=-1):
+        self.name = name
+        self.last_name  = last_name
+        self.email = email
+        self.id = id    
+        
+    

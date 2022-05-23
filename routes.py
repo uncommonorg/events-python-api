@@ -39,6 +39,9 @@ class Review(Resource):
     def post(self):
        data = request.get_json()
        return self.repo.review_add(data).__dict__
+   
+
+    
 
 
 

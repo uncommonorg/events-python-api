@@ -8,6 +8,7 @@ CORS(app)
 
 api = Api(app)
 
+
 BASE_URL = '/events/api'
 
 api.add_resource(EventsList, f'{BASE_URL}/events')
