@@ -16,23 +16,6 @@ user4 = UserModel("Abraham", "Lincoln", "ablinc@gmail.com", 2)
 
 
 
-<<<<<<< HEAD
-HOST = os.environ.get("HOST")
-USER = os.environ.get("USER")
-DB_PORT = os.environ.get("DB_PORT")
-DATABASE = os.environ.get("DATABASE")
-PASSWORD = os.environ.get("PASSWORD")
-
-class Repository():
-    def get_db(self):
-        return psycopg2.connect(
-                        host = HOST,
-                        database = DATABASE,
-                        user  = USER,
-                        password = PASSWORD,
-                        port = DB_PORT)
-        
-=======
 
 class Repository():
     def get_db(self):
@@ -40,7 +23,6 @@ class Repository():
             g.db = current_app.config['pSQL_pool'].getconn()
             return g.db
          
->>>>>>> dbpooling
     def events_get_all(self):
         conn = self.get_db()
         if(conn):
