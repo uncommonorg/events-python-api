@@ -2,8 +2,4 @@ flask-restful
 psycopg2
 pytest
 flask-cors
-<<<<<<< HEAD
-python-dotenv 
-=======
 python-dotenv
->>>>>>> dbpooling
