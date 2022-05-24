@@ -1,8 +1,12 @@
 class EventModel():
-    def __init__(self, title, content, created_at, id=-1):
+    def __init__(self,  owner,title,  event_time,description ,location, likes,datetime_added, id=-1):
+        self.owner = owner
         self.title = title
-        self.content = content
-        self.created_at = created_at
+        self. event_time=  event_time
+        self.description = description 
+        self.location = location
+        self.likes = likes
+        self.datetime_added = datetime_added
         self.eventId = id
 
 class ReviewModel():
