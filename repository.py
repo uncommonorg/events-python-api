@@ -45,7 +45,7 @@ class Repository():
         if (conn):
             ps_cursor = conn.cursor()
             ps_cursor.execute(
-                f'SELECT title, details, venue, likes, id FROM events WHERE id = {int(id)}'
+                f'SELECT title, description, location, likes, id FROM events WHERE id = {int(id)}'
             )
             event_record = ps_cursor.fetchone()
             ps_cursor.close()
