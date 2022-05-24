@@ -28,7 +28,7 @@ class Repository():
         if(conn):
             ps_cursor = conn.cursor()
             ps_cursor.execute(
-                "SELECT title, details, venue, likes, id FROM events order by id"
+                "SELECT title, description, location, likes, id FROM events order by id"
             )
             events_records = ps_cursor.fetchall()
             events_list = []
