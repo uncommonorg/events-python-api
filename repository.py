@@ -1,4 +1,4 @@
-from models import EventModel, ReviewModel
+from models import EventModel, ReviewModel, UserModel
 import psycopg2
 
 
@@ -77,6 +77,17 @@ class Repository():
             return event
                 
         
+    def user_add(self, data):
+        conn = self.get_db()
+        if (conn):
+            ps_cursor = conn.cursor()
+            ps_cursor.execute("INSERT INTO users (name, lastname, email) VALUES (%s, %s, %s)  RETURNING id",(data['name'], data['lastname'], data['email']))
+            conn.commit()
+            id = ps_cursor.fetchone()[0]
+            ps_cursor.close()
+            user = UserModel(data['name'],data['lastname'],data['email'],id)
+        return user
+    
     
     def reviews_get_all(self):
         return [review1, review2]

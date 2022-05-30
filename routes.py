@@ -22,23 +22,32 @@ class Event(Resource):
         data = request.get_json()
         return self.repo.event_add(data).__dict__
 
-class ReviewList(Resource):
+
+class User(Resource):
     def __init__(self, repo=repository):
         self.repo = repo
         
-    def get(self):
-        return [review.__dict__ for review in self.repo.reviews_get_all()]
+    def post(self, data):
+        data = request.get_json()
+        return self.repo.user_add(data).__dict__
     
-class Review(Resource):
-    def __init__(self, repo=repository):
-        self.repo = repo
+# class ReviewList(Resource):
+#     def __init__(self, repo=repository):
+#         self.repo = repo
+        
+#     def get(self):
+#         return [review.__dict__ for review in self.repo.reviews_get_all()]
+    
+# class Review(Resource):
+#     def __init__(self, repo=repository):
+#         self.repo = repo
 
-    def get(self):
-        return [review.__dict__ for review in self.repo.reviews_get_all()]
+#     def get(self):
+#         return [review.__dict__ for review in self.repo.reviews_get_all()]
 
-    def post(self):
-       data = request.get_json()
-       return self.repo.review_add(data).__dict__
+#     def post(self):
+#        data = request.get_json()
+#        return self.repo.review_add(data).__dict__
    
 
     
