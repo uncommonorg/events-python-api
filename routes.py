@@ -1,6 +1,10 @@
 from flask_restful import Resource
-from flask import request
+from flask import request, abort
 from repository import Repository
+
+import auth
+
+
 
 repository = Repository()
 
@@ -9,6 +13,14 @@ class EventsList(Resource):
         self.repo = repo
         
     def get(self):
+        # need authentication here
+        try:
+            print('checking user has logged in')
+            user_email = auth.authorize(request)
+            print("The user email was verified as %s".format(user_email))
+        except Exception: 
+            # If we get here, then authentication failed, abort the operation
+            abort(403)
         return [event.__dict__ for event in self.repo.events_get_all()]
     
 class Event(Resource):

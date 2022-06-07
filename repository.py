@@ -1,6 +1,6 @@
 from models import EventModel, ReviewModel, UserModel
 import psycopg2
-
+import os
 
 event1 = EventModel("Tawanda","Africa day","Wednesday @12","fun","Dz",50, 1)
 event2 = EventModel("David","Heros day","Thursday @1","fun","Dz",90, 1)
@@ -10,12 +10,15 @@ review2 = ReviewModel("reviewer by Tine","@", 2)
 review3 = ReviewModel("reviewer by Tine", "@", 3)
 review4 = ReviewModel("reviewer by Tine", "@", 4)
 
-HOST = '127.0.0.1'
-DATABASE = 'eventsapp'
-DB_PORT = '5432'
-USER = 'postgres'
-PASSWORD = 'tawanda'
 
+
+USER = os.environ.get("USER")
+DATABASE = os.environ.get("DATABASE")
+DB_PORT = os.environ.get("DB_PORT")
+HOST = os.environ.get("HOST")
+PASSWORD = os.environ.get("PASSWORD")
+MIN = os.environ.get("MIN"),
+MAX = os.environ.get("MAX")
 class Repository():
     
     def get_db(self):
@@ -47,7 +50,7 @@ class Repository():
                 if conn is not None:
                     conn.close()
 
-    def book_get_by_id(self, data ):
+    def event_get_by_id(self, data ):
         try:
             conn = self.get_db()
             if (conn):
