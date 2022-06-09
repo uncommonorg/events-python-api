@@ -17,12 +17,12 @@ MAX = os.environ.get('MAX')
 app = Flask(__name__)
 CORS(app)
 
-app.config['pSQL_pool'] = pool.SimpleConnectionPool(MIN, MAX,
-                                                    host=HOST,
-                                                    database=DATABASE,
-                                                    port=DB_PORT,
-                                                    user=USER,
-                                                    password=PASSWORD)
+# app.config['pSQL_pool'] = pool.SimpleConnectionPool(MIN, MAX,
+#                                                     host=HOST,
+#                                                     database=DATABASE,
+#                                                     port=DB_PORT,
+#                                                     user=USER,
+#                                                     password=PASSWORD)
 
 
 api = Api(app)

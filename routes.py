@@ -1,12 +1,29 @@
+from email import header
+from wsgiref import headers
 from flask_restful import Resource
 from flask import request, abort
 from repository import Repository
+import firebase_admin
+from firebase_admin import auth
 
-import auth
+
 
 
 
 repository = Repository()
+firebase_admin.initialize_app()
+
+def checkAuth(req):
+    headers = request.headers
+    if headers and 'Athorization' in headers:
+        id_token = headers['Authorization']
+        print("id_token:" + id_token)
+        try:
+            auth.verify_id_token(id_token.split()[1])
+        except:
+            return False
+        return True
+    return False
 
 class EventsList(Resource):
     def __init__(self, repo=repository):
