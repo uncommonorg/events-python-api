@@ -1,4 +1,4 @@
-from models import EventModel, ReviewModel
+from models import EventModel, ReviewModel, UserModel
 
 event1 = EventModel("church service","Happening at goromonzi","@4pm", 1)
 event2 = EventModel("party","happening in Harare","@2pm" ,2)
@@ -8,7 +8,12 @@ review2 = ReviewModel("reviewer by Tine","@", 2)
 review3 = ReviewModel("reviewer by Tine", "@", 3)
 review4 = ReviewModel("reviewer by Tine", "@", 4)
 
+user1 = UserModel("example@gmail.org")
+
 class Repository():
+    def save_user_email(self, email):
+        return UserModel(email['email'])
+    
     def events_get_all(self):
         return [event1, event2]
 

@@ -1,5 +1,5 @@
 from flask import request
-from routes import Event, Review
+from routes import Event, EventsList, Review
 from repository import Repository
 from unittest.mock import MagicMock
 from models import EventModel, ReviewModel
@@ -9,6 +9,7 @@ event2 = EventModel("party","happening in Harare","@2pm" ,2)
 
 review1 = ReviewModel("reviewed by Tino","09-03-2022", 1)
 review2 = ReviewModel("reviewer by Tine","02-03-2022", 2)
+
 
 
 def test_event_get():
@@ -22,7 +23,7 @@ def test_review_get():
     repo = MagicMock(spec=Repository)
     repo.get_review_by_id.return_value = review1
     review = Review(repo).get(1)
-    assert int(review['eventId']) = 2
+    assert int(review['eventId']) == 2
     assert review['comment'] == 'reviewer by Tine'
     
 def test_EventsList_get():

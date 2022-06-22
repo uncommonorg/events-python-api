@@ -1,8 +1,17 @@
 from flask_restful import Resource
 from flask import request
+from models import UserModel
 from repository import Repository
 
 repository = Repository()
+
+class User(Resource):
+    def __init__(self, repo=repository):
+        self.repo = repo
+        
+    def post(self):
+       data = request.get_json()
+       return self.repo.save_user_email(data).__dict__
 
 class EventsList(Resource):
     def __init__(self, repo=repository):
