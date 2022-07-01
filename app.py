@@ -11,7 +11,7 @@ CORS(app)
 
 api = Api(app)
 
-BASE_URL = '/events/api'
+BASE_URL = os.environ.get("BASE_URL")
 # BASE_URL = os.environ.get("BASE_URL")
 MIN = os.environ.get("MIN")
 MAX = os.environ.get("MAX")
@@ -33,7 +33,7 @@ api.add_resource(EventsList, f'{BASE_URL}/Events')
 api.add_resource(Event, f'{BASE_URL}/Events/<event_id>')
 api.add_resource(UserList, f'{BASE_URL}/Users')
 api.add_resource(User, f'{BASE_URL}/Users/<event_id>')
-print(app.config['pSQL_pool'])
+# print(app.config['pSQL_pool'])
 
 @app.teardown_appcontext
 def close_conn(e):
