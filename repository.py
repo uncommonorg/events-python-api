@@ -15,8 +15,6 @@ user4 = UserModel("Abraham", "Lincoln", "ablinc@gmail.com", 2)
 user4 = UserModel("Abraham", "Lincoln", "ablinc@gmail.com", 2)
 
 
-
-
 class Repository():
     def get_db(self):
         if 'db' not in g:
@@ -69,20 +67,20 @@ class Repository():
        
     
     def users_get_all(self):
-       
         conn = self.get_db()
         if (conn):
             ps_cursor = conn.cursor()
             ps_cursor.execute(
-                'SELECT user_name, last_name, email, id FROM users'
+                'SELECT name, last_name, email, userid FROM users'
             )
             users_records = ps_cursor.fetchall()
             users_list = []
             for row in users_records:
                 users_list.append(UserModel(row[0], row[1], row[2], row[3]))
             ps_cursor.close()
-            users = [user1, user2, user3]            
-        return users_list        
+        #users = [user1, user2, user3]            
+        return users_list    
+        #return users    
         
 
     def user_get_by_event_id(self, event_id):
@@ -94,11 +92,12 @@ class Repository():
         if (conn):
             ps_cursor = conn.cursor()
             ps_cursor.execute(
-               "INSERT INTO user(name, last_name, email) VALUES(%s, %s, %s) RETURNING event_id",
-               (data['name'], data['last_name'], data['email'], 1)
+               "INSERT INTO users(name, last_name, email) VALUES(%s, %s, %s) RETURNING userid",
+               (data['name'], data['last_name'], data['email'])
             )
             conn.commit()
             id = ps_cursor().fetchone()[0]
             ps_cursor.close()
             user = UserModel(data['name'], data['last_name'], data['email'], id)
+            print("User created: % s" % user)
         return user
