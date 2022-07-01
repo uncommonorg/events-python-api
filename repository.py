@@ -54,7 +54,18 @@ class Repository():
 
        
     def event_add(self, data):
-        return EventModel(data['title'], data['description'], data['date'], data['venue'], 2)
+        conn = self.get_db()
+        if (conn):
+            ps_cursor = conn.cursor()
+            ps_cursor.execute(
+               "INSERT INTO events(title, description, location, likes) VALUES(%s, %s, %s, %s) RETURNING event_id",
+               (data['title'], data['description'], data['location'], data['likes'], 1)
+            )
+            conn.commit()
+            id = ps_cursor().fetchone()[0]
+            ps_cursor.close()
+            event = EventModel(data['title'], data['description'], data['location'], data['likes'], id)
+        return event
        
     
     def users_get_all(self):
