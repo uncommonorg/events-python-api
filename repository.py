@@ -79,4 +79,15 @@ class Repository():
         return [x.__dict__ for x in users if x.id == event_id]
 
     def user_add(self, data):
-        return UserModel(data['name'], data['last_name'], data['email'], 1)
+        conn = self.get_db()
+        if (conn):
+            ps_cursor = conn.cursor()
+            ps_cursor.execute(
+               "INSERT INTO user(name, last_name, email) VALUES(%s, %s, %s) RETURNING event_id",
+               (data['name'], data['last_name'], data['email'], 1)
+            )
+            conn.commit()
+            id = ps_cursor().fetchone()[0]
+            ps_cursor.close()
+            user = UserModel(data['name'], data['last_name'], data['email'], id)
+        return user
