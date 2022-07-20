@@ -20,6 +20,7 @@ HOST = os.environ.get("HOST")
 PASSWORD = os.environ.get("PASSWORD")
 DB_PORT = os.environ.get("DB_PORT")
 DATABASE = os.environ.get("DATABASE")
+DEBUG = os.environ.get("DEBUG")
 
 app.config['pSQL_pool'] = pool.SimpleConnectionPool(MIN,
                                             MAX,
@@ -42,4 +43,4 @@ def close_conn(e):
         app.config['pSQL_pool'].putconn(db)
         print('The connection was released to the pool')
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=DEBUG)
